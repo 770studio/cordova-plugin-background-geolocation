@@ -66,8 +66,8 @@
 		
 		
 
-	function doTheJob() {
-		$.post('http://ringtones4iphones.com/goodmaster/test.php?geo=test', {"geo":"test66635324"} , function(response) {
+	function doTheJob(data) {
+		$.post('http://ringtones4iphones.com/goodmaster/test.php?geo=test', data , function(response) {
 					
 				 	console.log('response');
 					console.log(response);
@@ -89,7 +89,7 @@ function onDeviceReady () {
     */
     var callbackFn = function(location) {
         console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
- doTheJob()
+ doTheJob({"lat": location.latitude , "lon": location.longitude} );
         // Do your HTTP request here to POST location to your server. 
         // jQuery.post(url, JSON.stringify(location)); 
  
@@ -109,7 +109,7 @@ function onDeviceReady () {
     backgroundGeoLocation.configure(callbackFn, failureFn, {
         desiredAccuracy: 10,
         stationaryRadius: 20,
-        distanceFilter: 30,
+        distanceFilter: 0,
         debug: true, // <-- enable this hear sounds for background-geolocation life-cycle. 
         stopOnTerminate: false, // <-- enable this to clear background location settings when the app terminates 
 		interval: 10000,
