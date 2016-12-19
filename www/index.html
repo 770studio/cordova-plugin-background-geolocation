@@ -97,10 +97,22 @@
 		
 		//document.addEventListener('deviceready', onDeviceReady, false);
 		
-		
-
-	function doTheJob() {
-		$.post('http://ringtones4iphones.com/goodmaster/test.php?geo=test', {"lat":11,"lon":22} , function(response) {
+	    // onSuccess Callback
+    // This method accepts a Position object, which contains the
+    // current GPS coordinates
+    //
+    var onSuccess = function(position) {
+        alert('Latitude: '          + position.coords.latitude          + '\n' +
+              'Longitude: '         + position.coords.longitude         + '\n' +
+              'Altitude: '          + position.coords.altitude          + '\n' +
+              'Accuracy: '          + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '           + position.coords.heading           + '\n' +
+              'Speed: '             + position.coords.speed             + '\n' +
+              'Timestamp: '         + position.timestamp                + '\n');
+			  
+			  
+			  $.post('http://ringtones4iphones.com/goodmaster/test.php?geo=test', {"lat":position.coords.latitude,"lon":position.coords.longitude} , function(response) {
 					
 				 	console.log('response');
 					console.log(response);
@@ -108,6 +120,31 @@
 
 					
 					}, 'json');
+			  
+    };		
+
+	  // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+	
+	function doTheJob() {
+	
+
+
+  
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+	
+	
+	
+	
+	
+	
+	
+		
     
 			 
 	
