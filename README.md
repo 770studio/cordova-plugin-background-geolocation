@@ -1,88 +1,69 @@
-Example Background GeoLocation app.
-=============================================
+# Hello World PhoneGap Template [![bitHound Score][bithound-img]][bithound-url]
 
-Help to make this plugin better
-==============================
+A PhoneGap Hello World template
 
-Enable in app **Collect** feature, to send your position, battery level and basic device info to [background-geolocation-console](https://bgconsole.mybluemix.net/).
-This data can be used to improve plugin in the future.
+## Usage
 
-No ip address or device.uuid is stored on server. The device.uuid is anonymized before sent.
-I will not provide any binary builds of SampleApp, so you can always check the source code, what the app is actually doing. [Source code](https://github.com/mauron85/background-geolocation-console) of the console is also available.
+#### PhoneGap CLI
 
-## Description
+The hello-world template is the default when you create a new application using the [phonegap-cli][phonegap-cli-url].
 
-Example app shows some possibilities how to use this plugin in real apps.
-It is using IndexedDB to store locations when offline and resent them automatically when back online.
+    phonegap create my-app
 
-## How to build SampleApp
+Create an app using this template specifically:
 
-Replace platform with one of supported platforms: android, ios or wp8. In this example we will build for Android.
+    phonegap create my-app --template hello-world
 
-```
-$ cordova platform add android
-$ cordova build android
-```
+To see a list of other available PhoneGap templates:
 
-There is *after_platform_add* hook in config.xml which runs script that install all required plugins.
+    phonegap template list
 
-## Run on device
+## [config.xml][config-xml]
 
-### iOS
-You will need to install ios-deploy package.
+#### android-minSdkVersion (Android only)
 
-```
-$ npm -g install ios-deploy
-```
+Minimum SDK version supported on the target device. Maximum version is blank by default.
 
-```
-cordova run ios --device
-```
+This template sets the minimum to `14`.
 
-### Android
-```
-cordova run android --device
-```
+    <preference name="android-minSdkVersion" value="14" />
 
-## Run in simulator
+#### &lt;access ...&gt; (All)
 
-### iOS
-You will need to install ios-sim package first
-```
-$ npm -g install ios-sim
-```
+This template defaults to wide open access.
 
-Run in default emulator
-```
-$ cordova emulate ios
-```
+    <access origin="*" />
 
-You can use cordova run ios --list to see all available targets and cordova run ios --target=target_name to run application on a specific device or emulator (for example, cordova run ios --target="iPhone-6").
+It is strongly encouraged that you restrict access to external resources in your application before releasing to production.
+
+For more information on whitelist configuration, see the [Cordova Whitelist Guide][cordova-whitelist-guide] and the [Cordova Whitelist Plugin documentation][cordova-plugin-whitelist]
+
+## [www/index.html][index-html]
+
+#### Content Security Policy (CSP)
+
+The default CSP is similarly open:
+
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+
+Much like the access tag above, you are strongly encouraged to use a more restrictive CSP in production.
+
+A good starting point declaration might be:
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" />
+
+For more information on the Content Security Policy, see the [section on CSP in the Cordova Whitelist Plugin documentation][cordova-plugin-whitelist-csp].
+
+Another good resource for generating a good CSP declaration is [CSP is Awesome][csp-is-awesome]
 
 
-### Android
-To deploy the app on a default Android emulator.
-
-```
-$ cordova emulate android
-```
-
-You can use cordova run android --list to see all available targets and cordova run android --target=target_name to run application on a specific device or emulator (for example, cordova run android --target="Nexus4_emulator").
-
-## Development
-
-All plugins will be installed from npm at their latest version. However if you want to install your local version on cordova-plugin-background-geolocation, you can do that:
-
-```
-$ cordova plugin rm cordova-plugin-mauron85-background-geolocation
-$ cordova plugin add file:///absolute_path_to_your/cordova-plugin-background-geolocation/
-$ cordova build
-```
-
-## Credits
-
-* [transistorsoft](https://github.com/transistorsoft) for background-geolocation-console, cordova-background-geolocation and SampleApp.
-
-### iOS quirks
-
-If you're using XCode, boot the SampleApp in the iOS Simulator and enable ```Debug->Location->City Drive```.
+[phonegap-cli-url]: http://github.com/phonegap/phonegap-cli
+[cordova-app]: http://github.com/apache/cordova-app-hello-world
+[bithound-img]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world/badges/score.svg
+[bithound-url]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world
+[config-xml]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/config.xml
+[index-html]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/www/index.html
+[cordova-whitelist-guide]: https://cordova.apache.org/docs/en/dev/guide/appdev/whitelist/index.html
+[cordova-plugin-whitelist]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist
+[cordova-plugin-whitelist-csp]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist#content-security-policy
+[csp-is-awesome]: http://cspisawesome.com
