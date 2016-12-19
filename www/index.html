@@ -58,7 +58,40 @@
         app.initialize();
 		
 		
+	 
+ document.addEventListener('deviceready', function () {
+    // Android customization 
+    cordova.plugins.backgroundMode.setDefaults({
+    title:  'aaaaaaa',
+    ticker: 'ssssssss',
+    text:   'ttttttt',
+    icon: "icon" // this will look for icon.png in platforms/android/res/drawable
+    resume: true ,
+    color: "#123456",
+    isPublic: true ,
+})
+    // Enable background mode 
+    cordova.plugins.backgroundMode.enable();
+ 
+    // Called when background mode has been activated 
+    cordova.plugins.backgroundMode.onactivate = function () {
+        setTimeout(function () {
+            // Modify the currently displayed notification 
+            cordova.plugins.backgroundMode.configure({
+                text:'Running in background for more than 5s now.'
+            });
+        }, 5000);
 		
+		setInterval(doTheJob, 10000);
+		
+		
+		
+		
+		
+		
+		
+    }
+}, false);	
 		
 		
 		
@@ -81,32 +114,7 @@
 	} 		
 		
 		
- 
- document.addEventListener('deviceready', function () {
-    // Android customization 
-    cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
-    // Enable background mode 
-    cordova.plugins.backgroundMode.enable();
- 
-    // Called when background mode has been activated 
-    cordova.plugins.backgroundMode.onactivate = function () {
-        setTimeout(function () {
-            // Modify the currently displayed notification 
-            cordova.plugins.backgroundMode.configure({
-                text:'Running in background for more than 5s now.'
-            });
-        }, 5000);
-		
-		setInterval(doTheJob, 10000);
-		
-		
-		
-		
-		
-		
-		
-    }
-}, false);
+
  
  
  
